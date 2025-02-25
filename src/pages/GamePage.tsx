@@ -1,4 +1,4 @@
-import React, { Suspense, useReducer, useRef, useState } from "react";
+import React, { Suspense, useReducer, useRef } from "react";
 import HeaderComponent from "../components/Header.tsx";
 // import GameCard from "../components/GameCard.tsx";
 // import ScoreCard from "../components/ScoreCard.tsx";
@@ -12,7 +12,7 @@ type Props = {
   difficulty: number; // 0 - easy, 1 - normal, 2 - hard
 };
 
-const GamePage: React.FC<Props> = (props: Props) => {
+const GamePage: React.FC<Props> = ({ difficulty }: Props) => {
   const {
     currentMovieData,
     currentPalette,
@@ -73,7 +73,10 @@ const GamePage: React.FC<Props> = (props: Props) => {
               >
                 {currentMovieData.title}
               </p>
-              <MovieContextPanel movieData={currentMovieData} difficulty={0} />
+              <MovieContextPanel
+                movieData={currentMovieData}
+                difficulty={difficulty}
+              />
             </div>
             {/* <div className="container h-fit m-auto">
               <img

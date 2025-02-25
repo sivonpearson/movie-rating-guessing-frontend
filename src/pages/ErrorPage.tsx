@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const ErrorPage: React.FC<{ error_message: string }> = ({ error_message }) => {
   return (
