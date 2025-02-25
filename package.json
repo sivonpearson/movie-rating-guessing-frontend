@@ -1,5 +1,6 @@
 {
   "name": "movie-rating-guessing",
+  "homepage": "https://sivonpearson.github.io/movie-rating-guessing-frontend/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,12 +8,15 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.7",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
+    "gh-pages": "^6.3.0",
     "node-vibrant": "^4.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
