@@ -1,0 +1,22 @@
+:root {
+  --vibrant: #000000;
+  --muted: #3f3f3f;
+  --darkvibrant: #7f7f7f;
+  --lightvibrant: #bfbfbf;
+  --darkmuted: #ffffff;
+}
+
+@keyframes bounceWave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce-wave {
+  animation: bounceWave 1s infinite ease-in-out;
+}
