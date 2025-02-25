@@ -6,7 +6,7 @@ import { useLocalStorage } from "../scripts/LocalStorage";
 const calculateScore = (score_gap: number) => {
   const min_score = -3.0;
   const max_score = 3.0;
-  const scaling = 12.0;
+  const scaling = 25.0;
 
   const power = -(score_gap ** 2) / scaling;
 
@@ -70,7 +70,11 @@ const useGuess = () => {
     const newNumGuesses = parseInt(numGuesses) + 1;
     setNumGuesses(String(newNumGuesses));
 
-    const newScore = parseInt(score) + calculateScore(diff);
+    let newScore = parseInt(score) + calculateScore(diff);
+
+    // if perfect guess, give a bonus
+    if (diff == 0) newScore += 70;
+
     setScore(String(Math.floor(newScore)));
 
     const avg = (0.1 * newTotalDifference) / newNumGuesses;
