@@ -54,8 +54,6 @@ export const fetchMovieData = async () => {
       },
     });
 
-    console.log(`Response from backend: ${response}`);
-
     if (!response.ok) {
       throw new Error("Cannot find movie.");
     }
