@@ -3,6 +3,18 @@ import { fetchMovieData, MovieData } from "../scripts/api";
 import { extractPalette, Palette } from "../scripts/ColorExtractor";
 import { useLocalStorage } from "../scripts/LocalStorage";
 
+const calculateScore = (score_gap: number) => {
+  const min_score = -3.0;
+  const max_score = 3.0;
+  const scaling = 12.0;
+
+  const power = -(score_gap ** 2) / scaling;
+
+  const score = (max_score - min_score) * Math.exp(power) + min_score;
+
+  return Math.floor(score * 10);
+};
+
 const useGuess = () => {
   const [currentMovieData, setCurrentMovieData] = useState<MovieData | null>(
     null
@@ -14,6 +26,7 @@ const useGuess = () => {
   const [totalGap, setTotalGap] = useLocalStorage("total_gap", "0");
   const [numGuesses, setNumGuesses] = useLocalStorage("num_guesses", "0");
   const [averageGap, setAverageGap] = useState<string>("0");
+  const [score, setScore] = useLocalStorage("score", "0");
 
   const fetchMovie = async () => {
     // if (currentMovieData) return;
@@ -52,10 +65,13 @@ const useGuess = () => {
     );
 
     const newTotalDifference = parseInt(totalGap) + diff;
-    const newNumGuesses = parseInt(numGuesses) + 1;
-
     setTotalGap(String(newTotalDifference));
+
+    const newNumGuesses = parseInt(numGuesses) + 1;
     setNumGuesses(String(newNumGuesses));
+
+    const newScore = parseInt(score) + calculateScore(diff);
+    setScore(String(Math.floor(newScore)));
 
     const avg = (0.1 * newTotalDifference) / newNumGuesses;
 
@@ -70,11 +86,10 @@ const useGuess = () => {
   };
 
   const resetAll = () => {
-    console.log("Reset scores!");
-
     setTotalGap("0");
     setNumGuesses("0");
     setAverageGap("0");
+    setScore("0");
     setAnswered(false);
   };
 
@@ -87,6 +102,7 @@ const useGuess = () => {
     totalGap,
     numGuesses,
     averageGap,
+    score,
     handleUserSubmit,
     nextGuess,
     resetAll,

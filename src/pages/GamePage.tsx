@@ -22,6 +22,7 @@ const GamePage: React.FC<Props> = ({ difficulty }: Props) => {
     totalGap,
     numGuesses,
     averageGap,
+    score,
     handleUserSubmit,
     nextGuess,
     resetAll,
@@ -95,6 +96,7 @@ const GamePage: React.FC<Props> = ({ difficulty }: Props) => {
                 <p>Cumulative gap: {(parseInt(totalGap) / 10.0).toFixed(1)}</p>
                 <p>Number of guesses: {numGuesses}</p>
                 <p>Average gap: {averageGap}</p>
+                <p>Score: {(parseInt(score) / 10).toFixed(1)}</p>
                 <button
                   className="px-4 py-2 bg-blue-300 text-amber-50"
                   onClick={resetAll}
@@ -121,10 +123,10 @@ const GamePage: React.FC<Props> = ({ difficulty }: Props) => {
               ) : (
                 <div>
                   <p className="text-1xl">
-                    Guessed score: {userGuess.toFixed(1)}
+                    Guessed rating: {userGuess.toFixed(1)}
                   </p>
                   <p className="text-1xl">
-                    Actual score: {currentMovieData.rating_score}
+                    Actual rating: {currentMovieData.rating_score}
                   </p>
                   <button
                     className="px-4 py-2 bg-blue-300 text-amber-50"
