@@ -6,8 +6,8 @@ const LoadingPage: React.FC = () => {
     <div
       className="flex justify-center text-center items-center h-screen text-8xl space-x-2 font-bold"
       style={{
-        backgroundColor: `hsl(${125}, ${100}%, ${50}%)`,
-        color: `hsl(${0}, ${100}%, ${100}%)`,
+        backgroundColor: "var(--darkvibrant)",
+        color: "var(--lightvibrant)",
       }}
     >
       {"LOADING".split("").map((char, index) => (
