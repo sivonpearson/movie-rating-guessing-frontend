@@ -4,6 +4,7 @@
   --darkvibrant: #7f7f7f;
   --lightvibrant: #bfbfbf;
   --darkmuted: #ffffff;
+  --lightmuted: #ffffff;
 }
 
 @keyframes bounceWave {
@@ -19,4 +20,28 @@
 
 .animate-bounce-wave {
   animation: bounceWave 1s infinite ease-in-out;
+}
+
+.hover\:button-hover {
+  &:hover {
+    @media (hover: hover) {
+      background-color: var(--vibrant);
+    }
+  }
+}
+
+.text-button {
+  color: var(--lightvibrant) /* oklch(0.977 0.017 320.058) = #fdf4ff */;
+}
+
+.button-select {
+  background-color: var(--lightmuted) /* oklch(0.977 0.017 320.058) = #fdf4ff */;
+}
+
+.background-gradient {
+  background-image: radial-gradient(
+    circle,
+    var(--vibrant) 0%,
+    var(--darkvibrant) 100%
+  );
 }

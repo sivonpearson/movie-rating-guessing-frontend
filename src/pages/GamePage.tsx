@@ -15,7 +15,7 @@ type Props = {
 const GamePage: React.FC<Props> = ({ difficulty }: Props) => {
   const {
     currentMovieData,
-    currentPalette,
+    // currentPalette,
     userGuess,
     hasAnswered,
     error,
@@ -36,7 +36,7 @@ const GamePage: React.FC<Props> = ({ difficulty }: Props) => {
     return <ErrorPage error_message={error} />;
   }
 
-  if (!currentMovieData || !currentPalette) {
+  if (!currentMovieData /* || !currentPalette*/) {
     return (
       // <ErrorPage error_message={"Error: Movie data could not be fetched."} />
       <LoadingPage />
@@ -59,18 +59,21 @@ const GamePage: React.FC<Props> = ({ difficulty }: Props) => {
 
   return (
     <div
-      className="h-screen overflow-y-hidden"
-      style={{ backgroundColor: "var(--vibrant)" }}
+      className="h-screen background-gradient overflow-y-hidden"
+      // style={{
+      //   backgroundColor:
+      //     "radial-gradient(circle, var(--vibrant), var(--darkvibrant))",
+      // }}
     >
-      {currentMovieData && currentPalette && (
-        <Suspense fallback={<LoadingPage />}>
+      {currentMovieData && (
+        /*currentPalette &&*/ <Suspense fallback={<LoadingPage />}>
           <HeaderComponent />
           <div className="grid grid-cols-3 gap-x-3 items-stretch max-h-dvh">
             {/* <GameCard movieInfo={movieInfo} colorPalette={colorPalette} /> */}
             <div className="flex-col ml-3">
               <p
-                className="text-4xl mb-4 text-center font-bold"
-                style={{ color: "var(--darkmuted)" }}
+                className="text-4xl mb-4 mt-4 text-center font-bold"
+                style={{ color: "var(--lightvibrant)" }}
               >
                 {currentMovieData.title}
               </p>
@@ -78,6 +81,33 @@ const GamePage: React.FC<Props> = ({ difficulty }: Props) => {
                 movieData={currentMovieData}
                 difficulty={difficulty}
               />
+              {/* The stuff below is temporary */}
+              {/* <p className="flex gap-2">
+                <p
+                  className="w-8 h-8"
+                  style={{ backgroundColor: "var(--vibrant)" }}
+                />
+                <p
+                  className="w-8 h-8"
+                  style={{ backgroundColor: "var(--darkvibrant)" }}
+                />
+                <p
+                  className="w-8 h-8"
+                  style={{ backgroundColor: "var(--lightvibrant)" }}
+                />
+                <p
+                  className="w-8 h-8"
+                  style={{ backgroundColor: "var(--muted)" }}
+                />
+                <p
+                  className="w-8 h-8"
+                  style={{ backgroundColor: "var(--darkmuted)" }}
+                />
+                <p
+                  className="w-8 h-8"
+                  style={{ backgroundColor: "var(--lightmuted)" }}
+                />
+              </p> */}
             </div>
             {/* <div className="container h-fit m-auto">
               <img
@@ -92,14 +122,24 @@ const GamePage: React.FC<Props> = ({ difficulty }: Props) => {
             />
             {/* <ScoreCard /> */}
             <div className="container mx-auto px-4 py-8">
-              <div className="flex-col flex-center text-1xl">
+              <div
+                className="flex-col flex-center text-1xl"
+                style={{
+                  color: "var(--lightvibrant)",
+                  // backgroundColor: "var(--lightmuted)",
+                }}
+              >
                 <p>Cumulative gap: {(parseInt(totalGap) / 10.0).toFixed(1)}</p>
                 <p>Number of guesses: {numGuesses}</p>
                 <p>Average gap: {averageGap}</p>
                 <p>Score: {(parseInt(score) / 10).toFixed(1)}</p>
                 <button
-                  className="px-4 py-2 bg-blue-300 text-amber-50"
+                  className="px-4 py-2 text-sm transition-all duration-200 text-button hover:button-hover"
                   onClick={resetAll}
+                  style={{
+                    backgroundColor: "var(--darkmuted)",
+                    // color: "var(--lightvibrant)",
+                  }}
                 >
                   Reset Score
                 </button>
@@ -112,25 +152,40 @@ const GamePage: React.FC<Props> = ({ difficulty }: Props) => {
                     step={0.1}
                     minValue={1.0}
                     maxValue={10.0}
+                    backgroundColor="var(--darkmuted)"
+                    foregroundColor="var(--lightvibrant)"
                   />
                   <button
-                    className="px-4 py-2 bg-blue-300 text-amber-50"
+                    className="px-4 py-2 text-sm transition-all duration-200 text-button hover:button-hover"
                     onClick={submitRating}
+                    style={{
+                      backgroundColor: "var(--darkmuted)",
+                      // color: "var(--lightvibrant)",
+                    }}
                   >
                     Submit
                   </button>
                 </div>
               ) : (
                 <div>
-                  <p className="text-1xl">
-                    Guessed rating: {userGuess.toFixed(1)}
-                  </p>
-                  <p className="text-1xl">
-                    Actual rating: {currentMovieData.rating_score}
-                  </p>
+                  {" "}
+                  <span
+                    className="text-1xl"
+                    style={{
+                      color: "var(--lightvibrant)",
+                      // backgroundColor: "var(--lightmuted)",
+                    }}
+                  >
+                    <p>Guessed rating: {userGuess.toFixed(1)}</p>
+                    <p>Actual rating: {currentMovieData.rating_score}</p>
+                  </span>
                   <button
-                    className="px-4 py-2 bg-blue-300 text-amber-50"
+                    className="px-4 py-2 text-sm transition-all duration-200 text-button hover:button-hover"
                     onClick={nextGuess}
+                    style={{
+                      backgroundColor: "var(--darkmuted)",
+                      // color: "var(--lightvibrant)",
+                    }}
                   >
                     Next Movie
                   </button>

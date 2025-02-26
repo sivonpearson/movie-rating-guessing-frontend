@@ -1,28 +1,28 @@
 import { Vibrant } from "node-vibrant/browser";
 
-export class Palette {
-  vibrant: string;
-  muted: string;
-  darkvibrant: string;
-  lightvibrant: string;
-  darkmuted: string;
+// export class Palette {
+//   vibrant: string;
+//   muted: string;
+//   darkvibrant: string;
+//   lightvibrant: string;
+//   darkmuted: string;
 
-  constructor(
-    vibrant: string,
-    muted: string,
-    darkvibrant: string,
-    lightvibrant: string,
-    darkmuted: string
-  ) {
-    this.vibrant = vibrant;
-    this.muted = muted;
-    this.darkvibrant = darkvibrant;
-    this.lightvibrant = lightvibrant;
-    this.darkmuted = darkmuted;
-  }
-}
+//   constructor(
+//     vibrant: string,
+//     muted: string,
+//     darkvibrant: string,
+//     lightvibrant: string,
+//     darkmuted: string
+//   ) {
+//     this.vibrant = vibrant;
+//     this.muted = muted;
+//     this.darkvibrant = darkvibrant;
+//     this.lightvibrant = lightvibrant;
+//     this.darkmuted = darkmuted;
+//   }
+// }
 
-export const extractPalette = async (imageURL: string): Promise<Palette> => {
+export const extractPalette = async (imageURL: string): Promise<void> => {
   try {
     const palette = await Vibrant.from(imageURL).getPalette();
 
@@ -46,13 +46,9 @@ export const extractPalette = async (imageURL: string): Promise<Palette> => {
       "--darkmuted",
       palette.DarkMuted?.hex || "#ffffff"
     );
-
-    return new Palette(
-      palette.Vibrant?.hex || "#000000",
-      palette.Muted?.hex || "#3f3f3f",
-      palette.DarkVibrant?.hex || "#7f7f7f",
-      palette.LightVibrant?.hex || "#bfbfbf",
-      palette.DarkMuted?.hex || "#ffffff"
+    document.documentElement.style.setProperty(
+      "--lightmuted",
+      palette.LightMuted?.hex || "#ffffff"
     );
   } catch (error) {
     console.error("Error extracting colors:", error);

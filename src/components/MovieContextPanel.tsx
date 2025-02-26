@@ -37,7 +37,7 @@ const MovieContextPanel: React.FC<Props> = ({
   return (
     <div
       className="flex flex-col items-center"
-      style={{ backgroundColor: "var(--lightvibrant)" }}
+      style={{ backgroundColor: "var(--darkmuted)" }}
     >
       <div className="grid grid-cols-3 gap-4">
         {buttons
@@ -47,11 +47,14 @@ const MovieContextPanel: React.FC<Props> = ({
               key={index}
               className={`px-4 py-2 text-lg transition-all duration-200 ${
                 selected === button
-                  ? "font-bold focus:outline-offset-2 bg-amber-50"
-                  : "italic hover:bg-gray-100"
+                  ? "button-select font-bold focus:outline-offset-2"
+                  : "italic text-button hover:button-hover" // hover:bg-gray-100
               }`}
-              style={{ color: "var(--darkvibrant)" }}
-              onClick={() => setSelected(button)}
+              // style={{ color: "var(--lightvibrant)" }}
+              onClick={() => {
+                console.log(button);
+                setSelected(button);
+              }}
             >
               {button.name}
             </button>
@@ -59,7 +62,10 @@ const MovieContextPanel: React.FC<Props> = ({
       </div>
       <p
         className="px-4 py-2 overflow-y-scroll max-h-100"
-        style={{ color: "var(--darkvibrant)" }}
+        style={{
+          color: "var(--vibrant)",
+          // backgroundColor: "var(--lightmuted)",
+        }}
       >
         {selected?.text_output ?? ""}
       </p>

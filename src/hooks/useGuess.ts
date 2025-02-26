@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchMovieData, MovieData } from "../scripts/api";
-import { extractPalette, Palette } from "../scripts/ColorExtractor";
+import { extractPalette } from "../scripts/ColorExtractor";
 import { useLocalStorage } from "../scripts/LocalStorage";
 
 const calculateScore = (score_gap: number) => {
@@ -12,14 +12,20 @@ const calculateScore = (score_gap: number) => {
 
   const score = (max_score - min_score) * Math.exp(power) + min_score;
 
-  return Math.floor(score * 10);
+  // make the score an integer
+  let int_score = Math.floor(score * 10);
+
+  // if perfect guess, give a bonus
+  if (score_gap == 0) int_score += 70;
+
+  return int_score;
 };
 
 const useGuess = () => {
   const [currentMovieData, setCurrentMovieData] = useState<MovieData | null>(
     null
   );
-  const [currentPalette, setCurrentPalette] = useState<Palette | null>(null);
+  // const [currentPalette, setCurrentPalette] = useState<Palette | null>(null);
   const [userGuess, setUserGuess] = useState(5.0);
   const [hasAnswered, setAnswered] = useState(false);
   const [error, setError] = useState("");
@@ -38,11 +44,9 @@ const useGuess = () => {
 
       console.log(movieInfo_response);
 
-      const palette_response = await extractPalette(
-        movieInfo_response.posterURL
-      );
+      await extractPalette(movieInfo_response.posterURL);
 
-      setCurrentPalette(palette_response);
+      // setCurrentPalette(palette_response);
     } catch (err) {
       setError(String(err));
     }
@@ -70,10 +74,7 @@ const useGuess = () => {
     const newNumGuesses = parseInt(numGuesses) + 1;
     setNumGuesses(String(newNumGuesses));
 
-    let newScore = parseInt(score) + calculateScore(diff);
-
-    // if perfect guess, give a bonus
-    if (diff == 0) newScore += 70;
+    const newScore = parseInt(score) + calculateScore(diff);
 
     setScore(String(Math.floor(newScore)));
 
@@ -99,7 +100,7 @@ const useGuess = () => {
 
   return {
     currentMovieData,
-    currentPalette,
+    // currentPalette,
     userGuess,
     hasAnswered,
     error,

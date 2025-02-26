@@ -8,15 +8,15 @@ const HeaderComponent: React.FC = () => {
       {/* Make the one lighter in color than the one below it */}
       <header
         className="flex flex-center justify-center"
-        style={{ backgroundColor: "var(--muted)" }}
+        style={{ backgroundColor: "var(--darkvibrant)" }}
       >
         {/* Make the one below darker in color than the one above, but the text a negative of the current color*/}
         <Link
           to="/"
           className="py-3 px-4 text-4xl"
           style={{
-            backgroundColor: "var(--darkvibrant)",
-            color: "var(--lightvibrant)",
+            backgroundColor: "var(--lightvibrant)",
+            color: "var(--darkvibrant)",
           }}
         >
           Guess the Rating!

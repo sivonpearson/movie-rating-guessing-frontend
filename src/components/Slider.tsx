@@ -5,6 +5,8 @@ type SliderProps = {
   step?: number;
   minValue?: number;
   maxValue?: number;
+  backgroundColor?: string;
+  foregroundColor?: string;
 };
 
 export interface SliderRef {
@@ -13,7 +15,14 @@ export interface SliderRef {
 
 const Slider = forwardRef<SliderRef, SliderProps>(
   (
-    { defaultValue = 5, step = 1, minValue = 1, maxValue = 10 }: SliderProps,
+    {
+      defaultValue = 5,
+      step = 1,
+      minValue = 1,
+      maxValue = 10,
+      backgroundColor = "#d1d5dc",
+      foregroundColor = "oklch(0.623 0.214 259.815)",
+    }: SliderProps,
     ref
   ) => {
     const [value, setValue] = useState(defaultValue);
@@ -58,29 +67,48 @@ const Slider = forwardRef<SliderRef, SliderProps>(
       // container
       <div className="w-full max-w-lg mx-auto p-6">
         <div
-          className="relative w-full h-2 bg-gray-300 rounded-full"
+          className="relative w-full h-2 rounded-full"
+          style={{ backgroundColor: backgroundColor }}
           ref={sliderRef}
         >
           {/* Slider Track */}
           <div
-            className="absolute h-2 bg-blue-500 rounded-full"
+            className="absolute h-2 rounded-full"
             style={{
               width: `${((value - minValue) / (maxValue - minValue)) * 100}%`,
+              backgroundColor: foregroundColor,
             }}
           ></div>
 
+          <p
+            className="absolute mt-1 left-0"
+            style={{ color: foregroundColor }}
+          >
+            {minValue.toFixed(1)}
+          </p>
+          <p
+            className="absolute mt-1 right-0"
+            style={{ color: foregroundColor }}
+          >
+            {maxValue.toFixed(1)}
+          </p>
+
           {/* Knob */}
           <div
-            className="absolute w-6 h-6 bg-blue-600 rounded-full cursor-pointer -top-2 transform -translate-x-1/2"
+            className="absolute w-8 h-8 rounded-full cursor-pointer -top-3 transform -translate-x-1/2"
             style={{
               left: `${((value - minValue) / (maxValue - minValue)) * 100}%`,
+              backgroundColor: foregroundColor,
             }}
             onMouseDown={handleMouseDown}
           >
-            <p className="mt-5">{value.toFixed(1)}</p>
+            <p
+              className="text-center align-middle mt-0.5"
+              style={{ color: backgroundColor }}
+            >
+              {value.toFixed(1)}
+            </p>
           </div>
-          <p className="absolute mt-1 left-0">{minValue.toFixed(1)}</p>
-          <p className="absolute mt-1 right-0">{maxValue.toFixed(1)}</p>
         </div>
 
         {/* Display Value
