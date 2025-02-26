@@ -6,7 +6,7 @@ import { useLocalStorage } from "../scripts/LocalStorage";
 const calculateScore = (score_gap: number) => {
   const min_score = -3.0;
   const max_score = 3.0;
-  const scaling = 25.0;
+  const scaling = 150.0; // gives about a +/- 0.5 buffer
 
   const power = -(score_gap ** 2) / scaling;
 
