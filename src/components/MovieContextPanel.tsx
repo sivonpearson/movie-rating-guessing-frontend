@@ -22,9 +22,9 @@ const MovieContextPanel: React.FC<Props> = ({
     { name: "Year", max_difficulty: 0, text_output: movieData.year },
     { name: "Genre", max_difficulty: 0, text_output: movieData.genre },
     { name: "Plot", max_difficulty: 0, text_output: movieData.plot },
-    { name: "Director", max_difficulty: 0, text_output: movieData.director },
-    { name: "Writer", max_difficulty: 0, text_output: movieData.writer },
-    { name: "Actors", max_difficulty: 0, text_output: movieData.actors },
+    { name: "Director(s)", max_difficulty: 0, text_output: movieData.director },
+    { name: "Writer(s)", max_difficulty: 0, text_output: movieData.writer },
+    { name: "Actor(s)", max_difficulty: 0, text_output: movieData.actors },
     {
       name: "MPA Rating",
       max_difficulty: 0,
@@ -37,7 +37,7 @@ const MovieContextPanel: React.FC<Props> = ({
   return (
     <div
       className="flex flex-col items-center"
-      style={{ backgroundColor: "var(--darkmuted)" }}
+      // style={{ backgroundColor: "var(--darkmuted)" }}
     >
       <div className="grid grid-cols-3 gap-4">
         {buttons
@@ -46,9 +46,11 @@ const MovieContextPanel: React.FC<Props> = ({
             <button
               key={index}
               className={`px-4 py-2 text-lg transition-all duration-200 ${
-                selected === button
-                  ? "button-select font-bold focus:outline-offset-2"
-                  : "italic text-button hover:button-hover" // hover:bg-gray-100
+                selected?.name === button.name
+                  ? // ? "button-select font-bold focus:outline-offset-2"
+                    "button-selected"
+                  : "button-unselected"
+                // : "italic text-button hover:button-hover" // hover:bg-gray-100
               }`}
               // style={{ color: "var(--lightvibrant)" }}
               onClick={() => {
@@ -60,15 +62,17 @@ const MovieContextPanel: React.FC<Props> = ({
             </button>
           ))}
       </div>
-      <p
-        className="px-4 py-2 overflow-y-scroll max-h-100"
-        style={{
-          color: "var(--lightvibrant)",
-          // backgroundColor: "var(--lightmuted)",
-        }}
-      >
-        {selected?.text_output ?? ""}
-      </p>
+      {selected && (
+        <p
+          className="px-4 py-2 overflow-y-auto max-h-[57vh] mt-2" // overflow-y-scroll
+          style={{
+            color: "var(--lightvibrant)",
+            backgroundColor: "var(--darkmuted)",
+          }}
+        >
+          {selected?.text_output ?? ""}
+        </p>
+      )}
     </div>
   );
 };

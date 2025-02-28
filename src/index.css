@@ -10,15 +10,15 @@
 @keyframes bounceWave {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateY(0px);
   }
-
   50% {
-    transform: translateY(-10px);
+    transform: translateY(calc(-1 * var(--amplitude)));
   }
 }
 
 .animate-bounce-wave {
+  --amplitude: 10px;
   animation: bounceWave 1s infinite ease-in-out;
 }
 
@@ -34,8 +34,35 @@
   color: var(--lightvibrant) /* oklch(0.977 0.017 320.058) = #fdf4ff */;
 }
 
-.button-select {
-  background-color: var(--lightmuted) /* oklch(0.977 0.017 320.058) = #fdf4ff */;
+.button-selected {
+  /* background-color: var(--lightmuted) /* oklch(0.977 0.017 320.058) = #fdf4ff */
+  background-color: var(--lightvibrant);
+  color: var(--darkmuted);
+  font-style: italic;
+}
+
+.button-unselected {
+  /* background-color: var(--lightmuted), oklch(0.977 0.017 320.058) = #fdf4ff; */
+  background-color: var(--darkmuted);
+  font-style: italic;
+  color: var(--lightvibrant) /* oklch(0.977 0.017 320.058) = #fdf4ff */;
+}
+
+.button-unselected:hover {
+  background-color: var(--muted);
+  color: var(--lightmuted);
+  cursor: pointer;
+}
+
+.button-tap {
+  background-color: var(--darkmuted);
+  color: var(--lightvibrant);
+}
+
+.button-tap:hover {
+  background-color: var(--muted);
+  color: var(--lightmuted);
+  cursor: pointer;
 }
 
 .background-gradient {

@@ -45,7 +45,7 @@ const backend_url =
   "https://movie-rating-guessing-backend.vercel.app/api/proxy";
 
 // const fakeMovieData = new MovieData(
-//   "Lorem Ipsum",
+//   "Lorem ipsum",
 //   "https://m.media-amazon.com/images/M/MV5BNTNkNzJmY2MtOGNjYi00NDJmLWIyZTQtNmFmMGQ5M2VlOTI0XkEyXkFqcGc@._V1_QL75_UY281_CR0,0,190,281_.jpg",
 //   "9.0",
 //   "2000",

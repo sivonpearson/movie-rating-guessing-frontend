@@ -25,7 +25,6 @@ const useGuess = () => {
   const [currentMovieData, setCurrentMovieData] = useState<MovieData | null>(
     null
   );
-  // const [currentPalette, setCurrentPalette] = useState<Palette | null>(null);
   const [userGuess, setUserGuess] = useState(5.0);
   const [hasAnswered, setAnswered] = useState(false);
   const [error, setError] = useState("");
@@ -45,8 +44,6 @@ const useGuess = () => {
       console.log(movieInfo_response);
 
       await extractPalette(movieInfo_response.posterURL);
-
-      // setCurrentPalette(palette_response);
     } catch (err) {
       setError(String(err));
     }
@@ -100,7 +97,6 @@ const useGuess = () => {
 
   return {
     currentMovieData,
-    // currentPalette,
     userGuess,
     hasAnswered,
     error,

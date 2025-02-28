@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/globals.css";
+// import "../styles/globals.css";
 
 const LoadingPage: React.FC = () => {
   return (
@@ -14,7 +14,12 @@ const LoadingPage: React.FC = () => {
         <span
           key={index}
           className="animate-bounce-wave inline-block"
-          style={{ animationDelay: `${index * 0.1}s` }}
+          style={
+            {
+              animationDelay: `${index * 0.1}s`,
+              "--amplitude": "10px",
+            } as React.CSSProperties
+          }
         >
           {char}
         </span>
